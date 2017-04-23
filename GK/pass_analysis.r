@@ -20,5 +20,12 @@ epl_gk_pass_app$pos.<-'GK'
 
 epl_pst<-rbind(epl_fw_pass_app, epl_mf_pass_app, epl_df_pass_app, epl_gk_pass_app)
 
+# GK. Avg pass box-plot by season
+ggplot(subset(epl_pst, app>=10 & pos.==c('GK')), aes(factor(season_rep), avg_pass)) + geom_boxplot() + xlab('Season') + ylab('Pass') + ggtitle("EPL GK average number of pass")
+
+# Some GK players
+gk_player<-subset(epl_pst,name==c(' Joe Hart')|name==c(' David de Gea')|name==c(' Kasper Schmeichel'))
+ggplot(data = subset(gk_player, app>=10), aes(x = factor(season_rep), y = avg_pass, label=name, colour=name)) +geom_point()+geom_label()+ xlab('Season') + ylab('Pass')
+
 # Avg pass box-plot by season and position
 ggplot(subset(epl_pst, app>=10), aes(factor(season_rep), avg_pass, fill=pos.)) + geom_boxplot() + xlab('Season') + ylab('Pass') + ggtitle("EPL average number of pass by position")
